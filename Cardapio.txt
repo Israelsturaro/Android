@@ -1,0 +1,91 @@
+package com.example.pratos;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+
+public class MainActivity extends AppCompatActivity {
+
+    CheckBox cbVegetariano,cbPeixe,cbFrango,cbCarne,cbAbacaxi,cbSorvete,cbMousse,cbMousseCho,cbCha,cbSucoLaran,cbMelao,cbRefri;
+    Button Btn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //Principais
+        cbVegetariano = findViewById(R.id.cb1);
+        cbPeixe = findViewById(R.id.cb2);
+        cbFrango = findViewById(R.id.cb3);
+        cbCarne = findViewById(R.id.cb4);
+        //Sobremessa
+        cbAbacaxi = findViewById(R.id.cb5);
+        cbSorvete = findViewById(R.id.cb6);
+        cbMousse = findViewById(R.id.cb7);
+        cbMousseCho = findViewById(R.id.cb8);
+        //Bebidas
+        cbCha = findViewById(R.id.cb9);
+        cbSucoLaran = findViewById(R.id.cb10);
+        cbMelao = findViewById(R.id.cb11);
+        cbRefri = findViewById(R.id.cb12);
+        //Btn
+        Btn = findViewById(R.id.Btn);
+
+
+        Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double Total = 0;
+                double cal = 0;
+
+                if (cbVegetariano.isChecked()){
+                    cal = 180;
+                }
+                if (cbPeixe.isChecked()){
+                    cal= cal+230;
+                }
+                if (cbFrango.isChecked()){
+                    cal= cal+250;
+                }
+                if (cbCarne.isChecked()){
+                    cal = cal+350;
+                }
+                if (cbAbacaxi.isChecked()){
+                    cal = cal+75;
+                }
+                if (cbSorvete.isChecked()){
+                    cal = cal+110;
+                }
+                if (cbMousse.isChecked()){
+                    cal =cal+ 170;
+                }
+                if (cbMousseCho.isChecked()){
+                    cal = cal+200;
+                }
+                if(cbCha.isChecked()){
+                    cal = cal+20;
+                }
+                if (cbSucoLaran.isChecked()){
+                    cal = cal+70;
+                }
+                if (cbMelao.isChecked()){
+                    cal = cal+100;
+                }
+                if (cbRefri.isChecked()){
+                    cal =cal+65;
+                }
+
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(MainActivity.this);
+                dialogo.setTitle("Valor da conta: ");
+                dialogo.setMessage("Valor Final: "+cal);
+                dialogo.setNeutralButton("OK",null);
+                dialogo.show();
+
+              }
+        });
+    }
+}
