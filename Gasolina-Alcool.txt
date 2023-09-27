@@ -1,0 +1,66 @@
+package com.example.sextouu;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText  valorgas, valorAcool;
+    Button btn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        valorgas = findViewById(R.id.vl1);
+        valorAcool = findViewById(R.id.vl2);
+        btn = findViewById(R.id.Btn);
+    }
+    //Método de validação
+    public Boolean  validacao(String alcool,String gasolina){
+        Boolean camposValidos = true;
+        if (valorAcool==null || valorAcool.equals("") ){
+            camposValidos = false;
+        }else if (valorgas== null || valorgas.equals("")){
+            camposValidos = false;
+        }else {
+            camposValidos = true;
+        }
+        return  camposValidos;
+    }
+    //Metado para verificar o tipo de combustivel
+    public void calcular(View view){
+        String g = valorgas.getText().toString();
+        String a = valorAcool.getText().toString();
+        Boolean valid = validacao(a,g);
+        if (valid){
+            Double Palcool = Double.parseDouble(a);
+            Double Pgasolina = Double.parseDouble(g);
+            Double result = Palcool/Pgasolina;
+            String r = "";
+            if (result>0.7){
+                r = "gasolina";
+
+            }else{
+                r = "Alcool";
+            }
+            AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+            d.setTitle("Posto de Combustievl ");
+            d.setMessage("Melhor Opção: "+r);
+            d.setNeutralButton("Fechar", null);
+            d.show();
+        }else {
+            AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+            d.setTitle("ERRO ");
+            d.setMessage("Preencha os Campos!! ");
+            d.setNeutralButton("Fechar", null);
+            d.show();
+        }
+    }
+}

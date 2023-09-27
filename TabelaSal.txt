@@ -1,0 +1,151 @@
+package com.example.desafio;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+
+public class MainActivity extends AppCompatActivity {
+    RadioButton Radiobt1,Radiobt2,Radiobt3,Radiobt4,Radiobt5;
+    CheckBox checbox1;
+    EditText edit,edit2;
+    Button btn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Radiobt1 = findViewById(R.id.Rb1);
+        Radiobt2 = findViewById(R.id.Rb2);
+        Radiobt3 = findViewById(R.id.Rb3);
+        Radiobt4 = findViewById(R.id.Rb4);
+        Radiobt5 = findViewById(R.id.Rb5);
+        checbox1 = findViewById(R.id.cb1);
+        edit2 = findViewById(R.id.edt2);
+        edit = findViewById(R.id.edt1);
+        btn = findViewById(R.id.btn);
+    }
+
+    public void calcular(View view) {
+        double  result = 0;
+        double nortuno = 0;
+        double Addfilho = 0;
+        double Addfaltas = 0;
+        double ValorFinal = 0;
+        double ValorReceber = 0;
+        double diaria = 30;
+        double fgts = 0;
+        double inss = 0;
+
+        int falta = Integer.parseInt(edit2.getText().toString());
+        int filhos = Integer.parseInt(edit.getText().toString());
+
+        //Secretaria
+        if (Radiobt1.isChecked()) {
+            result = 850;
+            if (checbox1.isChecked()) {
+                nortuno = (result * 0.20);
+            }
+            if (filhos > 0 || result <= 1300){
+                Addfilho = (filhos * 56.43);
+            }
+            if (falta > 0) {
+                diaria = (result/diaria);
+                Addfaltas = diaria*falta;
+            }
+            inss = result * 0.09;
+            fgts = result * 0.08;
+            ValorReceber = (result+nortuno+Addfilho-fgts-inss-Addfaltas);
+        }
+
+        //Técnico
+        if (Radiobt2.isChecked()) {
+            result = 1.300;
+            if (checbox1.isChecked()) {
+                nortuno = (result * 0.20);
+            }
+            if (filhos > 0 || result <= 1300){
+                Addfilho = (filhos * 56.43);
+            }
+            if (falta > 0) {
+                diaria = (result/diaria);
+                Addfaltas = diaria*falta;
+            }
+            inss = result * 0.09;
+            fgts = result * 0.08;
+            ValorReceber = (result+nortuno+Addfilho-fgts-inss-Addfaltas);
+        }
+
+        //Engenheiro
+        if (Radiobt3.isChecked()) {
+            result = 8000;
+            if (checbox1.isChecked()) {
+                nortuno = (result * 0.20);
+            }
+            if (filhos > 0 || result <= 1300){
+                Addfilho = (filhos * 56.43);
+            }
+            if (falta > 0) {
+                diaria = (result/diaria);
+                Addfaltas = diaria*falta;
+            }
+            inss = result * 0.09;
+            fgts = result * 0.08;
+            ValorReceber = (result+nortuno+Addfilho-fgts-inss-Addfaltas);
+        }
+
+        //Analist. Sist.
+        if (Radiobt4.isChecked()) {
+            result = 2.500;
+            if (checbox1.isChecked()) {
+                nortuno = (result * 0.20);
+            }
+            if (filhos > 0 || result <= 1300){
+                Addfilho = (filhos * 56.43);
+            }
+            if (falta > 0) {
+                diaria = (result/diaria);
+                Addfaltas = diaria*falta;
+            }
+            inss = result * 0.09;
+            fgts = result * 0.08;
+            ValorReceber = (result+nortuno+Addfilho-fgts-inss-Addfaltas);
+        }
+
+        //Diretor
+        if (Radiobt5.isChecked()) {
+            result = 12000;
+            if (checbox1.isChecked()) {
+                nortuno = (result * 0.20);
+            }
+            if (filhos > 0 || result <= 1300){
+                Addfilho = (filhos * 56.43);
+            }
+            if (falta > 0) {
+                diaria = (result/diaria);
+                Addfaltas = diaria*falta;
+            }
+            inss = result * 0.09;
+            fgts = result * 0.08;
+            ValorReceber = (result+nortuno+Addfilho-fgts-inss-Addfaltas);
+        }
+            AlertDialog.Builder dialogo = new AlertDialog.Builder(MainActivity.this);
+            dialogo.setTitle("------Salario-------");
+            dialogo.setMessage("Valor Liquido: "+String.format("%.4f",ValorReceber)+"\n"+"Desconto Inss: "
+                    +String.format("%.1f",inss) +"\n"+"Desconto Fgts: "
+                    +String.format("%.1f",fgts) + "\n"+"Desconto Por Faltas: "
+                    +String.format("%.1f",Addfaltas)+ "\n"+"Adicinal Por Filhos: "
+                    +String.format("%.1f",Addfilho) + "\n"+"Adicinal Noturno: "
+                    +String.format("%.2f",nortuno)    );
+            dialogo.setNeutralButton("Gastar",null);
+            dialogo.show();
+
+        }
+
+    }

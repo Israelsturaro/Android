@@ -1,0 +1,62 @@
+package com.example.imc;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import javax.xml.transform.Result;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText Nd1;
+    EditText Nd2;
+    Button btn;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Nd1 = findViewById(R.id.Nd1);
+        Nd2 = findViewById(R.id.Nd2);
+        btn =  findViewById(R.id.Bnt);
+
+     btn.setOnClickListener(new View.OnClickListener() {
+         @SuppressLint("DefaultLocale")
+         @Override
+         public void onClick(View v) {
+             String numero1 = Nd1.getText().toString();
+             double  n1 = Double.parseDouble(Nd1.getText().toString());
+             String numero2 = Nd2.getText().toString();
+             double  n2 = Double.parseDouble(Nd2.getText().toString());
+
+             double  Result = n2/(n1*n1);
+             String  r = "";
+
+             if (Result <= 18.5){
+                 r = "Voce Está abaixo do peso";
+             } else if (Result <= 24.9 ) {
+                 r = "Voce Está no peso normal";
+             } else if (Result <= 29.9) {
+                 r = "Voce Está obesidade";
+             } else if (Result <= 34.9) {
+                 r = "Voce Está obesidade II ";
+             } else {
+                 r = "Voce Está obesidade III";
+             }
+
+             AlertDialog.Builder dialogo = new AlertDialog.Builder(MainActivity.this);
+             dialogo.setTitle("Resultado do IMC é: ");
+             dialogo.setMessage("O calculo do IMC: "+String.format("%.2f", Result)+"\n"+r);
+             dialogo.setNeutralButton("OK",null);
+             dialogo.show();
+         }
+     });
+    }
+}
